@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Bestie, You're My Favorite Human!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff7d6 0%, #ffebf4 100%);
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .doodle {
+            position: absolute;
+            opacity: 0.3;
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            font-size: 2rem;
+            color: #ffcc00;
+        }
+        
+        .heart {
+            font-size: 1.8rem;
+            color: #ff6b8b;
+        }
+        
+        .smiley {
+            font-size: 2.2rem;
+            color: #ff9e4f;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+            z-index: 1;
+            position: relative;
+        }
+        
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3.8rem;
+            color: #ff6b8b;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-shadow: 3px 3px 0 white, -3px -3px 0 white, 3px -3px 0 white, -3px 3px 0 white;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+            letter-spacing: 1px;
+        }
+        
+        .subtext {
+            font-size: 1.6rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: #555;
+            opacity: 0;
+            animation: slideIn 1s ease-in-out 0.3s forwards;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .gif-container {
+            margin: 1.5rem 0 2.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.6s forwards;
+            width: 320px;
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(255, 107, 139, 0.3);
+            border: 5px solid white;
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+        }
+        
+        .gif-container:hover {
+            transform: rotate(2deg) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 107, 139, 0.4);
+        }
+        
+        .gif-container:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 20px;
+            background-color: #ff9e9e;
+            border-radius: 10px 10px 0 0;
+            z-index: -1;
+        }
+        
+        .gif-container:after {
+            content: '✨ bestie vibes ✨';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ff6b8b;
+        }
+        
+        .gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 25px;
+        }
+        
+        .button {
+            background: linear-gradient(to right, #ff6b8b, #ff9e9e);
+            color: white;
+            font-size: 1.4rem;
+            font-weight: bold;
+            padding: 1.1rem 2.8rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 107, 139, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: bounceIn 1s ease-in-out 0.9s forwards;
+            letter-spacing: 1px;
+        }
+        
+        .button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 25px rgba(255, 107, 139, 0.5);
+        }
+        
+        .button:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+            animation: glowing 4s linear infinite;
+        }
+        
+        .button:after {
+            content: '♥';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+            100% { transform: translateY(-50%) scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes glowing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Floating animation for doodles */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtext {
+                font-size: 1.3rem;
+            }
+            
+            .gif-container {
+                width: 280px;
+                height: 210px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hey Bestie, You're My Favorite Human!</h1>
+        <p class="subtext">Because nobody else makes me smile like you do! ✨</p>
+        <div class="gif-container">
+            <img src="./gif1.gif" alt="Dancing Bears">
+        </div>
+        <button class="button">Let's Go!</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create doodles
+            const doodles = [
+                { type: 'star', html: '✦' },
+                { type: 'star', html: '✧' },
+                { type: 'star', html: '⋆' },
+                { type: 'heart', html: '♡' },
+                { type: 'heart', html: '♥' },
+                { type: 'smiley', html: '◡̈' },
+                { type: 'smiley', html: '◠‿◠' },
+                { type: 'smiley', html: '˙ᵕ˙' }
+            ];
+            
+            // Add 25 random doodles
+            for (let i = 0; i < 25; i++) {
+                const randomDoodle = doodles[Math.floor(Math.random() * doodles.length)];
+                const doodle = document.createElement('div');
+                doodle.className = `doodle ${randomDoodle.type}`;
+                doodle.innerHTML = randomDoodle.html;
+                doodle.style.left = `${Math.random() * 100}%`;
+                doodle.style.top = `${Math.random() * 100}%`;
+                
+                // Add floating animation with random duration and delay
+                const duration = 3 + Math.random() * 4;
+                const delay = Math.random() * 5;
+                doodle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                
+                document.body.appendChild(doodle);
+            }
+            
+            // Parallax effect on scroll
+            window.addEventListener('scroll', function() {
+                const scrollY = window.scrollY;
+                const doodleElements = document.querySelectorAll('.doodle');
+                
+                doodleElements.forEach((doodle, index) => {
+                    const speed = 0.05 + (index % 3) * 0.02;
+                    const currentTransform = doodle.style.transform;
+                    // Extract the current translateY if it exists
+                    const floatTransform = currentTransform.includes('translateY') 
+                        ? currentTransform.replace(/translateY\([^)]*\)/, '') 
+                        : currentTransform;
+                    
+                    doodle.style.transform = `translateY(${scrollY * speed}px) ${floatTransform}`;
+                });
+            });
+            
+            // Button bounce animation on click with confetti effect
+            const button = document.querySelector('.button');
+            button.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'bounceIn 0.5s ease-in-out';
+                }, 10);
+                
+                // Create confetti effect
+                for (let i = 0; i < 30; i++) {
+                    createConfetti();
+                }
+                document.body.style.animation = 'fadeOut 1s forwards';
+            setTimeout(() => {
+                window.location.href = 'memory.html'; // Replace with your next page URL
+            }, 1000);
+            });
+            
+            // Confetti function
+            function createConfetti() {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.borderRadius = '50%';
+                confetti.style.pointerEvents = 'none';
+                
+                // Position relative to button
+                const buttonRect = button.getBoundingClientRect();
+                const startX = buttonRect.left + buttonRect.width / 2 + window.scrollX;
+                const startY = buttonRect.top + buttonRect.height / 2 + window.scrollY;
+                
+                confetti.style.left = `${startX}px`;
+                confetti.style.top = `${startY}px`;
+                
+                document.body.appendChild(confetti);
+                
+                // Animate the confetti
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 5 + Math.random() * 10;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                let x = 0;
+                let y = 0;
+                let opacity = 1;
+                
+                const animateConfetti = () => {
+                    x += vx;
+                    y += vy;
+                    opacity -= 0.02;
+                    
+                    confetti.style.transform = `translate(${x}px, ${y}px) rotate(${x * 0.5}deg)`;
+                    confetti.style.opacity = opacity;
+                    
+                    if (opacity > 0) {
+                        requestAnimationFrame(animateConfetti);
+                    } else {
+                        confetti.remove();
+                    }
+                };
+                
+                requestAnimationFrame(animateConfetti);
+            }
+            
+            function getRandomColor() {
+                const colors = ['#ff6b8b', '#ffcc00', '#ff9e4f', '#98d8c8', '#c792ea'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            // Add hover effect to the gif container
+            const gifContainer = document.querySelector('.gif-container');
+            gifContainer.addEventListener('mouseover', function() {
+                this.style.transform = 'rotate(2deg) scale(1.05)';
+            });
+            
+            gifContainer.addEventListener('mouseout', function() {
+                this.style.transform = 'rotate(-2deg)';
+            });
+        });
+    </script>
+</body>
+</html>

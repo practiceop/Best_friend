@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 5 Reasons Why You're the GOAT</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            /* Enhanced gradient background */
+            background: linear-gradient(135deg, #fce4ec, #f8f5ea, #e1f5fe);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Floating background shapes */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 154, 173, 0.1) 0%, rgba(255, 154, 173, 0) 20%),
+                radial-gradient(circle at 90% 30%, rgba(224, 145, 224, 0.1) 0%, rgba(224, 145, 224, 0) 25%),
+                radial-gradient(circle at 50% 80%, rgba(96, 165, 250, 0.1) 0%, rgba(96, 165, 250, 0) 30%);
+            z-index: -1;
+        }
+        
+        /* Animated floating bubbles */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: float 8s infinite ease-in-out;
+            z-index: -1;
+        }
+        
+        .bubble:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 12s;
+        }
+        
+        .bubble:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            right: 15%;
+            animation-delay: 1s;
+            animation-duration: 10s;
+        }
+        
+        .bubble:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 15%;
+            left: 20%;
+            animation-delay: 2s;
+            animation-duration: 15s;
+        }
+        
+        .bubble:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            bottom: 25%;
+            right: 10%;
+            animation-delay: 3s;
+            animation-duration: 8s;
+        }
+        
+        /* Raining broken hearts */
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            content: "💔";
+            animation: rain linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes rain {
+            0% {
+                transform: translateY(-100vh);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+        
+        .notebook-page {
+            width: 90%;
+            max-width: 600px;
+            height: 85vh;
+            background-color: #f8f5ea;
+            position: relative;
+            padding: 40px;
+            box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.1), 
+                        0 0 30px rgba(224, 145, 224, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transform: rotate(-1deg);
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .notebook-page:hover {
+            transform: rotate(0deg);
+        }
+        
+        /* Enhanced notebook lines */
+        .notebook-page::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent,
+                    transparent 25px,
+                    #b3d1ff 25px,
+                    #b3d1ff 26px
+                );
+            z-index: 0;
+            opacity: 0.4;
+        }
+        
+        /* Enhanced red margin line */
+        .notebook-page::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 30px;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff9999, #ff6b6b);
+            z-index: 0;
+            opacity: 0.7;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .heading {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #e091e0, #ff7eb1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: slideDown 0.8s forwards;
+        }
+        
+        .reasons-list {
+            list-style-type: none;
+            margin-left: 40px;
+            flex-grow: 1;
+        }
+        
+        .reason-item {
+            font-family: 'Comic Neue', cursive;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateX(-10px);
+            display: flex;
+            align-items: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .reason-item:nth-child(1) { color: #ff7eb1; animation: fadeIn 0.5s forwards 1s; }
+        .reason-item:nth-child(2) { color: #a18aff; animation: fadeIn 0.5s forwards 1.5s; }
+        .reason-item:nth-child(3) { color: #ffb347; animation: fadeIn 0.5s forwards 2s; }
+        .reason-item:nth-child(4) { color: #64c9a6; animation: fadeIn 0.5s forwards 2.5s; }
+        .reason-item:nth-child(5) { color: #60a5fa; animation: fadeIn 0.5s forwards 3s; }
+        
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+        }
+        
+        .reason-text {
+            position: relative;
+            font-weight: 700;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+        }
+        
+        .reason-text::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 3px;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='3' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,1.5 Q25,3 50,1.5 T100,1.5' stroke='%23e091e0' stroke-width='2' fill='none' /%3E%3C/svg%3E");
+            background-size: 100px 3px;
+            background-repeat: repeat-x;
+            opacity: 0.7;
+        }
+        
+        .sticker {
+            position: absolute;
+            right: -30px;
+            top: 0;
+            font-size: 1.5rem;
+            transform: scale(0);
+            transition: transform 0.3s;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+        }
+        
+        .reason-item:hover {
+            transform: translateX(5px);
+            transition: transform 0.3s;
+        }
+        
+        .reason-item:hover .sticker {
+            transform: scale(1.2) rotate(10deg);
+        }
+        
+        .reason-item:hover {
+            filter: drop-shadow(0 0 5px rgba(224, 145, 224, 0.5));
+        }
+        
+        .doodles {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.4;
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        .doodle1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .doodle2 { top: 15%; right: 15%; animation-delay: 1s; }
+        .doodle3 { bottom: 20%; left: 15%; animation-delay: 2s; }
+        .doodle4 { bottom: 25%; right: 10%; animation-delay: 3s; }
+        .doodle5 { top: 50%; right: 5%; animation-delay: 4s; }
+        
+        .end-doodle {
+            display: flex;
+            justify-content: center;
+            font-size: 2rem;
+            margin-top: -6px;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards 3.5s;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .next-button {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff9aad, #e091e0);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(224, 145, 224, 0.3),
+                        0 0 15px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards 4s;
+            overflow: hidden;
+        }
+        
+        .next-button::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .next-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(224, 145, 224, 0.5),
+                        0 0 20px rgba(255, 255, 255, 0.7);
+        }
+        
+        .next-button:hover::before {
+            opacity: 1;
+        }
+        
+        .next-button:active {
+            animation: bounce 0.3s;
+        }
+        
+        .button-heart {
+            margin-left: 8px;
+            font-size: 1rem;
+            transform: scale(0);
+            transition: transform 0.3s;
+        }
+        
+        .next-button:hover .button-heart {
+            transform: scale(1.2);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        
+        @keyframes slideDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: scale(1.05); }
+            50% { transform: scale(0.95); }
+        }
+        
+        @media (max-width: 768px) {
+            .notebook-page {
+                padding: 30px 20px;
+                height: 90vh;
+            }
+            
+            .heading {
+                font-size: 2rem;
+            }
+            
+            .reasons-list {
+                margin-left: 20px;
+            }
+            
+            .reason-item {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating bubbles -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    
+    <!-- Raining broken hearts will be added by JavaScript -->
+    
+    <div class="notebook-page">
+        <div class="doodles doodle1">✨</div>
+        <div class="doodles doodle2">💕</div>
+        <div class="doodles doodle3">⭐</div>
+        <div class="doodles doodle4">🌈</div>
+        <div class="doodles doodle5">🌟</div>
+        
+        <div class="content">
+            <h1 class="heading">Top 5 Reasons Why You're the GOAT</h1>
+            
+            <ul class="reasons-list">
+                <li class="reason-item">
+                    <span class="emoji">🏆</span>
+                    <span class="reason-text">You always get my weird jokes.</span>
+                    <span class="sticker">💖</span>
+                </li>
+                <li class="reason-item">
+                    <span class="emoji">🍕</span>
+                    <span class="reason-text">You never judge me for eating too much pizza.</span>
+                    <span class="sticker">✨</span>
+                </li>
+                <li class="reason-item">
+                    <span class="emoji">🎯</span>
+                    <span class="reason-text">You always know how to make me laugh.</span>
+                    <span class="sticker">🌟</span>
+                </li>
+                <li class="reason-item">
+                    <span class="emoji">❤️</span>
+                    <span class="reason-text">You're basically my therapist and hype person.</span>
+                    <span class="sticker">🎀</span>
+                </li>
+                <li class="reason-item">
+                    <span class="emoji">🌍</span>
+                    <span class="reason-text">Because life without you would be BORING.</span>
+                    <span class="sticker">🥰</span>
+                </li>
+            </ul>
+            
+            <div class="end-doodle">😊💕</div>
+            
+            <div class="button-container">
+                <button class="next-button">
+                    Next ➡️
+                    <span class="button-heart">❤️</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Function to create raining broken hearts
+        function createRainingHearts() {
+            const numberOfHearts = 20;
+            
+            // Create hearts
+            for (let i = 0; i < numberOfHearts; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '😘😍';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 5 + 3 + 's'; // Between 3-8 seconds
+                heart.style.opacity = Math.random() * 0.7 + 0.3; // Between 0.3-1
+                heart.style.fontSize = Math.random() * 15 + 15 + 'px'; // Between 15-30px
+                document.body.appendChild(heart);
+            }
+            
+            // Replace hearts that have fallen
+            setInterval(() => {
+                const hearts = document.querySelectorAll('.heart');
+                const randomHeart = hearts[Math.floor(Math.random() * hearts.length)];
+                randomHeart.style.left = Math.random() * 100 + 'vw';
+                randomHeart.style.top = '-50px';
+            }, 1000);
+        }
+        
+        // Initialize the raining hearts
+        window.addEventListener('load', createRainingHearts);
+        
+        // Button animation
+        document.querySelector('.next-button').addEventListener('click', function() {
+            this.style.animation = 'bounce 0.3s';
+            setTimeout(() => {
+                this.style.animation = '';
+                // In a real implementation, this would navigate to the next page
+                window.location.href = 'final.html'; 
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
